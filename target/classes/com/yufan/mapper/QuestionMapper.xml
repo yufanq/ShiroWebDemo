@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yufan.dao.QuestionMapper">
+  <resultMap id="BaseResultMap" type="com.yufan.entity.Question">
+    <id column="q_id" jdbcType="INTEGER" property="qId" />
+    <result column="q_content" jdbcType="VARCHAR" property="qContent" />
+    <result column="q_answer" jdbcType="VARCHAR" property="qAnswer" />
+    <result column="q_count" jdbcType="INTEGER" property="qCount" />
+    <result column="q_error" jdbcType="INTEGER" property="qError" />
+    <result column="q_analysis" jdbcType="VARCHAR" property="qAnalysis" />
+    <result column="pt_id" jdbcType="INTEGER" property="ptId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    q_id, q_content, q_answer, q_count, q_error, q_analysis, pt_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question
+    where q_id = #{qId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from question
+    where q_id = #{qId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yufan.entity.Question">
+    insert into question (q_id, q_content, q_answer, 
+      q_count, q_error, q_analysis, 
+      pt_id)
+    values (#{qId,jdbcType=INTEGER}, #{qContent,jdbcType=VARCHAR}, #{qAnswer,jdbcType=VARCHAR}, 
+      #{qCount,jdbcType=INTEGER}, #{qError,jdbcType=INTEGER}, #{qAnalysis,jdbcType=VARCHAR}, 
+      #{ptId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yufan.entity.Question">
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="qId != null">
+        q_id,
+      </if>
+      <if test="qContent != null">
+        q_content,
+      </if>
+      <if test="qAnswer != null">
+        q_answer,
+      </if>
+      <if test="qCount != null">
+        q_count,
+      </if>
+      <if test="qError != null">
+        q_error,
+      </if>
+      <if test="qAnalysis != null">
+        q_analysis,
+      </if>
+      <if test="ptId != null">
+        pt_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="qId != null">
+        #{qId,jdbcType=INTEGER},
+      </if>
+      <if test="qContent != null">
+        #{qContent,jdbcType=VARCHAR},
+      </if>
+      <if test="qAnswer != null">
+        #{qAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="qCount != null">
+        #{qCount,jdbcType=INTEGER},
+      </if>
+      <if test="qError != null">
+        #{qError,jdbcType=INTEGER},
+      </if>
+      <if test="qAnalysis != null">
+        #{qAnalysis,jdbcType=VARCHAR},
+      </if>
+      <if test="ptId != null">
+        #{ptId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yufan.entity.Question">
+    update question
+    <set>
+      <if test="qContent != null">
+        q_content = #{qContent,jdbcType=VARCHAR},
+      </if>
+      <if test="qAnswer != null">
+        q_answer = #{qAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="qCount != null">
+        q_count = #{qCount,jdbcType=INTEGER},
+      </if>
+      <if test="qError != null">
+        q_error = #{qError,jdbcType=INTEGER},
+      </if>
+      <if test="qAnalysis != null">
+        q_analysis = #{qAnalysis,jdbcType=VARCHAR},
+      </if>
+      <if test="ptId != null">
+        pt_id = #{ptId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where q_id = #{qId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yufan.entity.Question">
+    update question
+    set q_content = #{qContent,jdbcType=VARCHAR},
+      q_answer = #{qAnswer,jdbcType=VARCHAR},
+      q_count = #{qCount,jdbcType=INTEGER},
+      q_error = #{qError,jdbcType=INTEGER},
+      q_analysis = #{qAnalysis,jdbcType=VARCHAR},
+      pt_id = #{ptId,jdbcType=INTEGER}
+    where q_id = #{qId,jdbcType=INTEGER}
+  </update>
+</mapper>

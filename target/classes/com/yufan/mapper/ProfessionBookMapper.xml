@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yufan.dao.ProfessionBookMapper">
+  <resultMap id="BaseResultMap" type="com.yufan.entity.ProfessionBook">
+    <id column="pb_id" jdbcType="INTEGER" property="pbId" />
+    <result column="b_id" jdbcType="INTEGER" property="bId" />
+    <result column="p_id" jdbcType="INTEGER" property="pId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pb_id, b_id, p_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from profession_book
+    where pb_id = #{pbId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from profession_book
+    where pb_id = #{pbId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yufan.entity.ProfessionBook">
+    insert into profession_book (pb_id, b_id, p_id
+      )
+    values (#{pbId,jdbcType=INTEGER}, #{bId,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yufan.entity.ProfessionBook">
+    insert into profession_book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pbId != null">
+        pb_id,
+      </if>
+      <if test="bId != null">
+        b_id,
+      </if>
+      <if test="pId != null">
+        p_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pbId != null">
+        #{pbId,jdbcType=INTEGER},
+      </if>
+      <if test="bId != null">
+        #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yufan.entity.ProfessionBook">
+    update profession_book
+    <set>
+      <if test="bId != null">
+        b_id = #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null">
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pb_id = #{pbId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yufan.entity.ProfessionBook">
+    update profession_book
+    set b_id = #{bId,jdbcType=INTEGER},
+      p_id = #{pId,jdbcType=INTEGER}
+    where pb_id = #{pbId,jdbcType=INTEGER}
+  </update>
+</mapper>

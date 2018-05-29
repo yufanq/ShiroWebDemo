@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yufan.dao.PaperMapper">
+  <resultMap id="BaseResultMap" type="com.yufan.entity.Paper">
+    <id column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+    <result column="p_number" jdbcType="INTEGER" property="pNumber" />
+    <result column="p_score" jdbcType="INTEGER" property="pScore" />
+    <result column="p_count" jdbcType="INTEGER" property="pCount" />
+    <result column="p_teacher" jdbcType="VARCHAR" property="pTeacher" />
+    <result column="p_rqcodepath" jdbcType="VARCHAR" property="pRqcodepath" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    p_id, p_name, p_number, p_score, p_count, p_teacher, p_rqcodepath
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from paper
+    where p_id = #{pId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from paper
+    where p_id = #{pId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yufan.entity.Paper">
+    insert into paper (p_id, p_name, p_number, 
+      p_score, p_count, p_teacher, 
+      p_rqcodepath)
+    values (#{pId,jdbcType=INTEGER}, #{pName,jdbcType=VARCHAR}, #{pNumber,jdbcType=INTEGER}, 
+      #{pScore,jdbcType=INTEGER}, #{pCount,jdbcType=INTEGER}, #{pTeacher,jdbcType=VARCHAR}, 
+      #{pRqcodepath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yufan.entity.Paper">
+    insert into paper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="pName != null">
+        p_name,
+      </if>
+      <if test="pNumber != null">
+        p_number,
+      </if>
+      <if test="pScore != null">
+        p_score,
+      </if>
+      <if test="pCount != null">
+        p_count,
+      </if>
+      <if test="pTeacher != null">
+        p_teacher,
+      </if>
+      <if test="pRqcodepath != null">
+        p_rqcodepath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="pName != null">
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pNumber != null">
+        #{pNumber,jdbcType=INTEGER},
+      </if>
+      <if test="pScore != null">
+        #{pScore,jdbcType=INTEGER},
+      </if>
+      <if test="pCount != null">
+        #{pCount,jdbcType=INTEGER},
+      </if>
+      <if test="pTeacher != null">
+        #{pTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="pRqcodepath != null">
+        #{pRqcodepath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yufan.entity.Paper">
+    update paper
+    <set>
+      <if test="pName != null">
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pNumber != null">
+        p_number = #{pNumber,jdbcType=INTEGER},
+      </if>
+      <if test="pScore != null">
+        p_score = #{pScore,jdbcType=INTEGER},
+      </if>
+      <if test="pCount != null">
+        p_count = #{pCount,jdbcType=INTEGER},
+      </if>
+      <if test="pTeacher != null">
+        p_teacher = #{pTeacher,jdbcType=VARCHAR},
+      </if>
+      <if test="pRqcodepath != null">
+        p_rqcodepath = #{pRqcodepath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yufan.entity.Paper">
+    update paper
+    set p_name = #{pName,jdbcType=VARCHAR},
+      p_number = #{pNumber,jdbcType=INTEGER},
+      p_score = #{pScore,jdbcType=INTEGER},
+      p_count = #{pCount,jdbcType=INTEGER},
+      p_teacher = #{pTeacher,jdbcType=VARCHAR},
+      p_rqcodepath = #{pRqcodepath,jdbcType=VARCHAR}
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+</mapper>

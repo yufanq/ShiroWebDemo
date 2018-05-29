@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yufan.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.yufan.entity.Admin">
+    <id column="a_id" jdbcType="INTEGER" property="aId" />
+    <result column="a_account" jdbcType="VARCHAR" property="aAccount" />
+    <result column="a_password" jdbcType="VARCHAR" property="aPassword" />
+    <result column="a_nickname" jdbcType="VARCHAR" property="aNickname" />
+    <result column="a_salt" jdbcType="VARCHAR" property="aSalt" />
+    <result column="a_locked" jdbcType="TINYINT" property="aLocked" />
+    <collection property="roles" ofType="Role">
+    	<id column="r_id" jdbcType="INTEGER" property="rId" />
+  	 	<result column="r_name" jdbcType="VARCHAR" property="rName" />
+  		<result column="r_available" jdbcType="TINYINT" property="rAvailable" />
+    </collection>
+    <collection property="jurisdictions" ofType="Jurisdiction">
+    	<id column="j_id" jdbcType="INTEGER" property="jId" />
+    	<result column="j_name" jdbcType="VARCHAR" property="jName" />
+   		<result column="l_type" jdbcType="VARCHAR" property="lType" />
+   		<result column="l_uri" jdbcType="VARCHAR" property="lUri" />
+   		<result column="l_permission" jdbcType="VARCHAR" property="lPermission" />
+    	<result column="l_available" jdbcType="TINYINT" property="lAvailable" />
+  
+    </collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    a_id, a_account, a_password, a_nickname, a_salt, a_locked
+  </sql>
+  <select id="selectByName"  resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" />
+   from admin 
+  	where a_account = {username} 
+  </select>
+  <select id="selectAllAdmin" resultMap="BaseResultMap">
+	  select a.*,r.* from admin a inner join admin_role ar on a.a_id = ar.a_id 
+  		inner join role r on ar.r_id = r.r_id		 
+  </select>
+  <select id="selectAdminRole" resultMap="BaseResultMap">
+  	  select a.*,r.* from admin a inner join admin_role ar on a.a_id = ar.a_id 
+  		inner join role r on ar.r_id = r.r_id	
+  		where  a.a_account = {username} 
+  </select>
+  <select id="selectAdminJuricdiction" resultMap="BaseResultMap">
+  		select a.*,j.* 
+  		from admin a inner join admin_role ar on a.a_id = ar.a_id
+  		inner join role r on ar.r_id = r.r_id
+  		inner join role_jurisdiction rj on r.r_id = rj.r_id
+  		inner join jurisdiction j on j.j_id = rj.j_id
+  		where a.a_account = {username} 
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yufan.entity.Admin">
+    insert into admin (a_id, a_account, a_password, 
+      a_nickname, a_salt, a_locked
+      )
+    values (#{aId,jdbcType=INTEGER}, #{aAccount,jdbcType=VARCHAR}, #{aPassword,jdbcType=VARCHAR}, 
+      #{aNickname,jdbcType=VARCHAR}, #{aSalt,jdbcType=VARCHAR}, #{aLocked,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yufan.entity.Admin">
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        a_id,
+      </if>
+      <if test="aAccount != null">
+        a_account,
+      </if>
+      <if test="aPassword != null">
+        a_password,
+      </if>
+      <if test="aNickname != null">
+        a_nickname,
+      </if>
+      <if test="aSalt != null">
+        a_salt,
+      </if>
+      <if test="aLocked != null">
+        a_locked,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="aAccount != null">
+        #{aAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="aPassword != null">
+        #{aPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="aNickname != null">
+        #{aNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="aSalt != null">
+        #{aSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="aLocked != null">
+        #{aLocked,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yufan.entity.Admin">
+    update admin
+    <set>
+      <if test="aAccount != null">
+        a_account = #{aAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="aPassword != null">
+        a_password = #{aPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="aNickname != null">
+        a_nickname = #{aNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="aSalt != null">
+        a_salt = #{aSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="aLocked != null">
+        a_locked = #{aLocked,jdbcType=TINYINT},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yufan.entity.Admin">
+    update admin
+    set a_account = #{aAccount,jdbcType=VARCHAR},
+      a_password = #{aPassword,jdbcType=VARCHAR},
+      a_nickname = #{aNickname,jdbcType=VARCHAR},
+      a_salt = #{aSalt,jdbcType=VARCHAR},
+      a_locked = #{aLocked,jdbcType=TINYINT}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+</mapper>

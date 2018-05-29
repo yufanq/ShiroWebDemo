@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yufan.dao.ProfessionMapper">
+  <resultMap id="BaseResultMap" type="com.yufan.entity.Profession">
+    <id column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    p_id, p_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from profession
+    where p_id = #{pId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from profession
+    where p_id = #{pId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yufan.entity.Profession">
+    insert into profession (p_id, p_name)
+    values (#{pId,jdbcType=INTEGER}, #{pName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yufan.entity.Profession">
+    insert into profession
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pId != null">
+        p_id,
+      </if>
+      <if test="pName != null">
+        p_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pId != null">
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="pName != null">
+        #{pName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yufan.entity.Profession">
+    update profession
+    <set>
+      <if test="pName != null">
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yufan.entity.Profession">
+    update profession
+    set p_name = #{pName,jdbcType=VARCHAR}
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+</mapper>

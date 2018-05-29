@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yufan.dao.ChapterMapper">
+  <resultMap id="BaseResultMap" type="com.yufan.entity.Chapter">
+    <id column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="b_id" jdbcType="INTEGER" property="bId" />
+    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    c_id, b_id, c_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chapter
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chapter
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yufan.entity.Chapter">
+    insert into chapter (c_id, b_id, c_name
+      )
+    values (#{cId,jdbcType=INTEGER}, #{bId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yufan.entity.Chapter">
+    insert into chapter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        c_id,
+      </if>
+      <if test="bId != null">
+        b_id,
+      </if>
+      <if test="cName != null">
+        c_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="bId != null">
+        #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null">
+        #{cName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yufan.entity.Chapter">
+    update chapter
+    <set>
+      <if test="bId != null">
+        b_id = #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yufan.entity.Chapter">
+    update chapter
+    set b_id = #{bId,jdbcType=INTEGER},
+      c_name = #{cName,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>

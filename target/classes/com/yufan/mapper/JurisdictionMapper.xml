@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yufan.dao.JurisdictionMapper">
+  <resultMap id="BaseResultMap" type="com.yufan.entity.Jurisdiction">
+    <id column="j_id" jdbcType="INTEGER" property="jId" />
+    <result column="j_name" jdbcType="VARCHAR" property="jName" />
+    <result column="l_type" jdbcType="VARCHAR" property="lType" />
+    <result column="l_uri" jdbcType="VARCHAR" property="lUri" />
+    <result column="l_permission" jdbcType="VARCHAR" property="lPermission" />
+    <result column="l_available" jdbcType="TINYINT" property="lAvailable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    j_id, j_name, l_type, l_uri, l_permission, l_available
+  </sql>
+  <select id="selectAllJurisdiction" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from jurisdiction
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jurisdiction
+    where j_id = #{jId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jurisdiction
+    where j_id = #{jId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yufan.entity.Jurisdiction">
+    insert into jurisdiction (j_id, j_name, l_type, 
+      l_uri, l_permission, l_available
+      )
+    values (#{jId,jdbcType=INTEGER}, #{jName,jdbcType=VARCHAR}, #{lType,jdbcType=VARCHAR}, 
+      #{lUri,jdbcType=VARCHAR}, #{lPermission,jdbcType=VARCHAR}, #{lAvailable,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yufan.entity.Jurisdiction">
+    insert into jurisdiction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jId != null">
+        j_id,
+      </if>
+      <if test="jName != null">
+        j_name,
+      </if>
+      <if test="lType != null">
+        l_type,
+      </if>
+      <if test="lUri != null">
+        l_uri,
+      </if>
+      <if test="lPermission != null">
+        l_permission,
+      </if>
+      <if test="lAvailable != null">
+        l_available,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jId != null">
+        #{jId,jdbcType=INTEGER},
+      </if>
+      <if test="jName != null">
+        #{jName,jdbcType=VARCHAR},
+      </if>
+      <if test="lType != null">
+        #{lType,jdbcType=VARCHAR},
+      </if>
+      <if test="lUri != null">
+        #{lUri,jdbcType=VARCHAR},
+      </if>
+      <if test="lPermission != null">
+        #{lPermission,jdbcType=VARCHAR},
+      </if>
+      <if test="lAvailable != null">
+        #{lAvailable,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yufan.entity.Jurisdiction">
+    update jurisdiction
+    <set>
+      <if test="jName != null">
+        j_name = #{jName,jdbcType=VARCHAR},
+      </if>
+      <if test="lType != null">
+        l_type = #{lType,jdbcType=VARCHAR},
+      </if>
+      <if test="lUri != null">
+        l_uri = #{lUri,jdbcType=VARCHAR},
+      </if>
+      <if test="lPermission != null">
+        l_permission = #{lPermission,jdbcType=VARCHAR},
+      </if>
+      <if test="lAvailable != null">
+        l_available = #{lAvailable,jdbcType=TINYINT},
+      </if>
+    </set>
+    where j_id = #{jId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yufan.entity.Jurisdiction">
+    update jurisdiction
+    set j_name = #{jName,jdbcType=VARCHAR},
+      l_type = #{lType,jdbcType=VARCHAR},
+      l_uri = #{lUri,jdbcType=VARCHAR},
+      l_permission = #{lPermission,jdbcType=VARCHAR},
+      l_available = #{lAvailable,jdbcType=TINYINT}
+    where j_id = #{jId,jdbcType=INTEGER}
+  </update>
+</mapper>
