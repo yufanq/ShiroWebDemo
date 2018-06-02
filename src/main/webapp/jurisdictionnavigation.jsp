@@ -3,14 +3,19 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
    <jsp:include page="header.jsp"></jsp:include>
    
     <div class="vernav2 iconmenu">
     	<ul>
-        	<li><a href="adminmanager.jsp" class="gallery">管理员管理</a></li>
-            <li><a href="rolemanager.jsp" class="widgets">角色管理</a></li>
-            <li><a href="jurisdictionmanager.jsp" class="support">权限管理</a></li>
-        <a class="togglemenu"></a>
+        	<c:forEach items="${adminlists }" var="l">
+         	<li><a href="${pageContext.request.contextPath}/${l.lUri}" class="${l.lStyle }">${l.jName }</a></li>
+         </c:forEach>
+
+         <a class="togglemenu"></a>
         <br /><br />
     </div><!--leftmenu-->
      

@@ -18,11 +18,15 @@
   <sql id="Base_Column_List">
     r_id, r_name, r_available
   </sql>
+  <select id="selectRoleBybelongtoAdmin" resultMap="BaseResultMap">
+  		  select r.* from admin a inner join admin_role ar on a.a_id = ar.a_id 
+  		inner join role r on ar.r_id = r.r_id	
+  		where  a.a_account = #{aAccount} 
+  </select>
   <select id="selectAllRole" resultMap="BaseResultMap">
-  	select r.*, j.* from
-  		role r inner join role_jurisdiction rj on r.r_id = rj.r_id 
-  		inner join jurisdiction j on rj.j_in = j.j_id
-  		
+    select 
+    <include refid="Base_Column_List" />
+    from role
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

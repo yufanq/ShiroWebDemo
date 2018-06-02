@@ -42,4 +42,11 @@ public class Role {
     public void setrAvailable(Byte rAvailable) {
         this.rAvailable = rAvailable;
     }
+
+	@Override
+	public String toString() {
+		return "Role [rId=" + rId + ", rName=" + rName + ", rAvailable="
+				+ rAvailable + ", jurisdictions=" + jurisdictions + "]";
+	}
+    
 }

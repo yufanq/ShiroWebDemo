@@ -5,13 +5,30 @@ public class Jurisdiction {
 
     private String jName;
 
-    private String lType;
-
+    private ResourceType lType = ResourceType.menu; // 资源类型
+    
+    private Integer jParent;
     private String lUri;
 
+    private String lStyle;
+    
     private String lPermission;
 
     private Byte lAvailable;
+    
+    
+    public static enum ResourceType {
+        menu("菜单"), button("按钮"), list("列表");
+
+        private final String info;
+        private ResourceType(String info) {
+            this.info = info;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+    }
 
     public Integer getjId() {
         return jId;
@@ -29,15 +46,23 @@ public class Jurisdiction {
         this.jName = jName == null ? null : jName.trim();
     }
 
-    public String getlType() {
-        return lType;
-    }
+    public ResourceType getlType() {
+		return lType;
+	}
 
-    public void setlType(String lType) {
-        this.lType = lType == null ? null : lType.trim();
-    }
+	public void setlType(ResourceType lType) {
+		this.lType = lType;
+	}
 
-    public String getlUri() {
+	public Integer getjParent() {
+		return jParent;
+	}
+
+	public void setjParent(Integer jParent) {
+		this.jParent = jParent;
+	}
+
+	public String getlUri() {
         return lUri;
     }
 
@@ -60,4 +85,29 @@ public class Jurisdiction {
     public void setlAvailable(Byte lAvailable) {
         this.lAvailable = lAvailable;
     }
+
+    public boolean isRootNode() {
+        return jId == 1;
+    }
+
+	public String getlStyle() {
+		return lStyle;
+	}
+
+	public void setlStyle(String lStyle) {
+		this.lStyle = lStyle;
+	}
+
+	@Override
+	public String toString() {
+		return "Jurisdiction [jId=" + jId + ", jName=" + jName + ", lType="
+				+ lType + ", jParent=" + jParent + ", lUri=" + lUri
+				+ ", lStyle=" + lStyle + ", lPermission=" + lPermission
+				+ ", lAvailable=" + lAvailable + "]";
+	}
+
+	
+
+
+	
 }

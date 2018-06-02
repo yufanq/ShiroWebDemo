@@ -99,6 +99,8 @@
         <property name="passwordParam" value="password"/>
         <property name="rememberMeParam" value="rememberMe"/>
         <property name="loginUrl" value="/login"/>
+        <!-- 删除了 index.jsp页面之后该生效 -->
+        <property name="successUrl" value="/"></property>
     </bean>
 
     <bean id="sysUserFilter" class="com.yufan.shiro.filter.SysUserFilter"/>
@@ -118,8 +120,11 @@
                 /login = authc
                 /logout = logout
                 /authenticated = authc
+                /static/css/**=anon  <!--设置静态资源文件为游客可访问-->
+                /static/fonts/**=anon  <!--设置静态资源文件为游客可访问-->
+                /static/images/**=anon  <!--设置静态资源文件为游客可访问-->
+                /static/js/**=anon  <!--设置静态资源文件为游客可访问-->
                 /** = user,sysUser
-                /static/**=anon<!--设置静态资源文件为游客可访问-->
             </value>
         </property>
     </bean>

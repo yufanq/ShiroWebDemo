@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF8"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,12 +49,12 @@
                     </div>
                 </div><!--loginf-->
             </div><!--nopassword-->
-            
-            <form id="login" action="index.jsp" method="post">
+            <div class="error">${error}</div>
+            <form id="login" action="" method="post">
             	
                 <div class="username">
                 	<div class="usernameinner">
-                    	<input type="text" name="username" id="username" />
+                    	<input type="text" name="username" id="username" <shiro:principal/> />
                     </div>
                 </div>
                 
@@ -65,7 +66,8 @@
                 
                 <button>登录</button>
                 
-                <div class="keep"><input type="checkbox" /> 记住密码</div>
+                <div class="keep">
+    <input type="checkbox" name="rememberMe" value="true"><br/> 记住密码</div>
             
             </form>
             

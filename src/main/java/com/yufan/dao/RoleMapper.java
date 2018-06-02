@@ -2,6 +2,7 @@ package com.yufan.dao;
 
 import java.util.List;
 
+import com.yufan.entity.Admin;
 import com.yufan.entity.Role;
 
 public interface RoleMapper {
@@ -18,5 +19,7 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
     
     List<Role> selectAllRole();
+    
+    List<Role> selectRoleBybelongtoAdmin(Admin admin);
     
 }

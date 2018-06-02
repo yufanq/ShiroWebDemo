@@ -12,15 +12,13 @@
 jQuery(document).ready(function(){
 	
 	///// FORM TRANSFORMATION /////
-	jQuery('input:checkbox, input:radio, select.uniformselect, input:file').uniform();
+	jQuery('input:checkbox, input:radio, select.uniformselect, select.aaaauniformselectinput:file').uniform();
 
-
+	dualselect
 	///// DUAL BOX /////
 	var db = jQuery('#dualselect').find('.ds_arrow .arrow');	//get arrows of dual select
 	var sel1 = jQuery('#dualselect select:first-child');		//get first select element
 	var sel2 = jQuery('#dualselect select:last-child');			//get second select element
-	
-	sel2.empty(); //empty it first from dom.
 	
 	db.click(function(){
 		var t = (jQuery(this).hasClass('ds_prev'))? 0 : 1;	// 0 if arrow prev otherwise arrow next

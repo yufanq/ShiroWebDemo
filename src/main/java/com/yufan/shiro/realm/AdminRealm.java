@@ -38,7 +38,7 @@ public class AdminRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
         String username = (String)token.getPrincipal();
-
+        String password = new String((char[])token.getCredentials()); //得到密码
         Admin user = adminService.queryAdmin(username);
 
         if(user == null) {
@@ -48,12 +48,11 @@ public class AdminRealm extends AuthorizingRealm {
         if(Boolean.TRUE.equals(user.getaLocked())) {
             throw new LockedAccountException(); //帐号锁定
         }
-
         //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 user.getaAccount(), //用户名
                 user.getaPassword(), //密码
-                ByteSource.Util.bytes(user.getaSalt()),//salt=username+salt
+                ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
                 getName()  //realm name
         );
         return authenticationInfo;

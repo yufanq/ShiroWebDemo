@@ -115,24 +115,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </span>
                         </p>
                         <p>
+                          
                         	<label>权限选择</label>
+                        	
                             <span id="dualselect" class="dualselect">
-                            	<select class="uniformselect" name="select3" multiple="multiple" size="10">
+                           	<select class="uniformselect" name="select3" multiple="multiple" size="10">
                                     <option value="">权限 One</option>
                                     <option value="">权限 Two</option>
-                                    <option value="">权限 Three</option>
-                                    <option value="">权限 Four</option>
-                                    <option value="">权限 Five</option>
-                                    <option value="">权限 Six</option>
+                                </select>
+                               
+                                <span  class="ds_arrow">
+                                	<span class="arrow ds_prev">&laquo;</span>
+                                     <span class="arrow ds_next">&raquo;</span>
+                                </span>
+                                <select  name="select4" multiple="multiple" size="10">
+                                	 <option value="">权限 Six</option>
                                     <option value="">权限 Seven</option>
                                     <option value="">权限 Eight</option>
-                                </select>
-                                <span class="ds_arrow">
-                                	<span class="arrow ds_prev">&laquo;</span>
-                                    <span class="arrow ds_next">&raquo;</span>
-                                </span>
-                                <select name="select4" multiple="multiple" size="10">
-                                	
                                 </select>
                             </span>
                         </p>

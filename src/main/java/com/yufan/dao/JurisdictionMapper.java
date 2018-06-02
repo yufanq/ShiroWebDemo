@@ -2,6 +2,8 @@ package com.yufan.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.yufan.entity.Jurisdiction;
 
 public interface JurisdictionMapper {
@@ -18,4 +20,11 @@ public interface JurisdictionMapper {
     int updateByPrimaryKey(Jurisdiction record);
     
     List<Jurisdiction> selectAllJurisdiction();
+    
+    List<Jurisdiction> selectJurisdictionByParentid(Integer parentid);
+    
+    Integer selectjurisdictionCount();
+    
+    List<Jurisdiction> selectAllJurisdictionByPage(@Param("start")Integer start,@Param("end") Integer end);
+    
 }

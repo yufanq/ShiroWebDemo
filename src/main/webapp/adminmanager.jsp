@@ -3,6 +3,9 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,9 +51,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="pagedesc">The content below are loaded using inline data</span>
             
             <ul class="hornav">
+              <shiro:hasPermission name="jurisdiction:admin:view">
                 <li class="current"><a href="#basicform">管理员列表</a></li>
-                <li><a href="#validation">管理员角色</a></li>
-                <li><a href="#create">管理员添加</a></li>  
+              </shiro:hasPermission>
+              <shiro:hasPermission name="jurisdiction:admin:accredit">
+              <li><a href="#validation">管理员角色</a></li>
+              </shiro:hasPermission>
+               <shiro:hasPermission name="jurisdiction:admin:create">
+                 <li><a href="#create">管理员添加</a></li> 
+              </shiro:hasPermission>
             </ul>
         </div><!--pageheader-->
         
@@ -70,35 +79,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <thead>
                                         <tr>
                                             <th class="head0">管理员id</th>
-                                            <th class="head1">管理员名称</th>
+                                            <th class="head1">管理员账号</th>
+                                            <th class="head1">管理员密码</th>
+                                            <th class="head1">管理员昵称</th>
+                                            <th class="head1">是否锁定</th>
                                             <th class="head0" colspan="2">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>01/12/12</td>
-                                            <td>10</td>
-                                            <td><a>修改</a></td>
-                                            <td><a>删除</a></td>
+                                    <c:forEach items="${adminList }" var="a">
+                                     <tr>
+                                            <td>${a.aId }</td>
+                                            <td>${a.aAccount}</td>
+                                            <td>${a.aPassword }</td>
+                                            <td>${a.aNickname }</td>
+                                            <td>${a.aLocked }</td>
+                                            <td>
+                                            	 <shiro:hasPermission name="jurisdiction:admin:update">
+                                            		<button> 修改</button> 
+                                             	</shiro:hasPermission>
+                                            </td>
+                                            <td>
+                                            		<shiro:hasPermission name="jurisdiction:admin:delete">
+                                            			<button> 删除</button> 
+                                             		</shiro:hasPermission>
+                                             </td>
                                         </tr>
+                                    </c:forEach>
+                           
+                                 
+                                       
                                     </tbody>
                                 </table>
+                               
                             </div><!--widgetcontent-->
                         </div><!--widgetbox-->
                         <br />
-                    
-                    <ul class="pagination pagination2">
-                    	<li class="first"><a href="" class="disable">&laquo;</a></li>
-                        <li class="previous"><a href="" class="disable">&lsaquo;</a></li>
-                    	<li><a href="" class="current">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
-                        <li class="next"><a href="">&rsaquo;</a></li>
-                        <li class="last"><a href="">&raquo;</a></li>
-                    </ul>
-                    <br />
+                     <br />
       </div><!--subcontent-->
          
          
@@ -108,9 +125,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	<label>管理员选择</label>
                         	   <span class="formwrapper">
                             	<select data-placeholder="选择管理员" class="chzn-select" style="width:350px;" tabindex="2">
-                                <option value="">管理员 One</option>
-                                <option value="">管理员Two</option>
-                                <option value="">管理员Three</option>
+                               		<c:forEach items="${adminRoleList }" var="arl">
+                               				<option value="${ arl.aId }">${ arl.aNickname } ${ arl.aAccount }</option>
+                              		</c:forEach>
                             </select>
                             </span>
                         </p>
@@ -118,21 +135,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	<label>角色选择</label>
                             <span id="dualselect" class="dualselect">
                             	<select class="uniformselect" name="select3" multiple="multiple" size="10">
-                                    <option value="">角色 One</option>
-                                    <option value="">角色 Two</option>
-                                    <option value="">角色 Three</option>
-                                    <option value="">角色 Four</option>
-                                    <option value="">角色 Five</option>
-                                    <option value="">角色 Six</option>
-                                    <option value="">角色 Seven</option>
-                                    <option value="">角色 Eight</option>
+                               		<c:forEach items="${noBelongRole }" var="role">
+                               			<option value="${role.rId }">${ role.rName }</option>
+                               		</c:forEach>
+                                    
                                 </select>
                                 <span class="ds_arrow">
                                 	<span class="arrow ds_prev">&laquo;</span>
                                     <span class="arrow ds_next">&raquo;</span>
                                 </span>
                                 <select name="select4" multiple="multiple" size="10">
-                                	
+                                	<c:forEach items="${belongRole }" var="r">
+                               			<option value="${r.rId }">${ r.rName }</option>
+                               		</c:forEach>
+                                    
                                 </select>
                             </span>
                         </p>
@@ -142,7 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   </form>
          </div><!--subcontent-->
          <div id="create" class="subcontent" style="display: none">
-                   <form class="stdform" action="" method="post">
+                   <form class="stdform" action="${pageContext.request.contextPath}/admin/create" method="post">
              			    <p>
                         	<label>管理员名称</label>
                             <span class="field"><input type="text" name="firstname" id="firstname2" class="longinput" /></span>

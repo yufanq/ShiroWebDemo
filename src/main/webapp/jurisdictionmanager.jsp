@@ -3,6 +3,10 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,8 +52,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="pagedesc">The content below are loaded using inline data</span>
             
             <ul class="hornav">
-                <li class="current"><a href="#basicform">权限列表</a></li>
-                <li><a href="#validation">权限添加</a></li>
+             	<shiro:hasPermission name="jurisdiction:role:view">
+             		<li class="current"><a href="#basicform">权限列表</a></li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="jurisdiction:role:create">
+                	<li><a href="#validation">权限添加</a></li>
+           		</shiro:hasPermission>
             </ul>
         </div><!--pageheader-->
         
@@ -70,16 +78,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <tr>
                                             <th class="head0">权限id</th>
                                             <th class="head1">权限名称</th>
+                                            <th class="head1">权限类型</th>
+                                            <th class="head1">权限父id</th>
+                                            <th class="head1">权限uri</th>
+                                            <th class="head1">权限样式</th>
+                                            <th class="head1">权限值</th>
+                                            <th class="head1">权限是否可用</th>
                                             <th class="head0" colspan="2">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>01/12/12</td>
-                                            <td>10</td>
-                                            <td><a>修改</a></td>
-                                            <td><a>删除</a></td>
-                                        </tr>
+                        		     <c:forEach items="${jurisdictionList }" var="j">
+                                        	<tr>
+                                            	<td>${ j.jId }</td>
+                                            	<td>${ j.jName }</td>
+                                            	<td>${ j.lType }</td>
+                                            	<td>${ j.jParent }</td>
+                                            	<td>${ j.lUri }</td>
+                                            	<td>${ j.lStyle }</td>
+                                            	<td>${ j.lPermission }</td>
+                                            	<td>${ j.lAvailable }</td>
+                                        	          <td>
+                                            	 <shiro:hasPermission name="jurisdiction:role:update">
+                                            		<button> 修改</button> 
+                                             	</shiro:hasPermission>
+                                            </td>
+                                            <td>
+                                            		<shiro:hasPermission name="jurisdiction:role:delete">
+                                            			<button> 删除</button> 
+                                             		</shiro:hasPermission>
+                                             </td>
+                                	        </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div><!--widgetcontent-->

@@ -56,9 +56,11 @@ public class Admin {
     public void setaNickname(String aNickname) {
         this.aNickname = aNickname == null ? null : aNickname.trim();
     }
-
-    public String getaSalt() {
+    public String getCredentialsSalt() {
         return aAccount + aSalt;
+    }
+    public String getaSalt() {
+        return  aSalt;
     }
 
     public void setaSalt(String aSalt) {
@@ -83,6 +85,13 @@ public class Admin {
 	}
 	public void setJurisdictions(Set<Jurisdiction> jurisdictions) {
 		this.jurisdictions = jurisdictions;
+	}
+	@Override
+	public String toString() {
+		return "Admin [aId=" + aId + ", aAccount=" + aAccount + ", aPassword="
+				+ aPassword + ", aNickname=" + aNickname + ", aSalt=" + aSalt
+				+ ", aLocked=" + aLocked + ", roles=" + roles
+				+ ", jurisdictions=" + jurisdictions + "]";
 	}
 
     

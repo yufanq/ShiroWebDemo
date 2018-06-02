@@ -30,16 +30,15 @@
   <select id="selectByName"  resultMap="BaseResultMap">
   	select <include refid="Base_Column_List" />
    from admin 
-  	where a_account = {username} 
+  	where a_account = #{username} 
   </select>
   <select id="selectAllAdmin" resultMap="BaseResultMap">
-	  select a.*,r.* from admin a inner join admin_role ar on a.a_id = ar.a_id 
-  		inner join role r on ar.r_id = r.r_id		 
+	  select  <include refid="Base_Column_List" /> from admin 	 
   </select>
   <select id="selectAdminRole" resultMap="BaseResultMap">
   	  select a.*,r.* from admin a inner join admin_role ar on a.a_id = ar.a_id 
   		inner join role r on ar.r_id = r.r_id	
-  		where  a.a_account = {username} 
+  		where  a.a_account = #{username} 
   </select>
   <select id="selectAdminJuricdiction" resultMap="BaseResultMap">
   		select a.*,j.* 
@@ -47,7 +46,7 @@
   		inner join role r on ar.r_id = r.r_id
   		inner join role_jurisdiction rj on r.r_id = rj.r_id
   		inner join jurisdiction j on j.j_id = rj.j_id
-  		where a.a_account = {username} 
+  		where a.a_account = #{username} 
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

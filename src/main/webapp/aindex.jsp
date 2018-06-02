@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -192,7 +193,7 @@
                                         <ul class="entrylist">
                                               <li>
                                                 <div class="entry_wrap">
-                                                    <div class="entry_img"><img src="images/thumbs/image1.png" alt="" /></div>
+                                                    <div class="entry_img"><img src="${pageContext.request.contextPath}/static/images/thumbs/image1.png" alt="" /></div>
                                                     <div class="entry_content">
                                                         <h4><a href="">Why Won't My Cat Eat?</a></h4>
                                                         <small>Submitted by: <a href=""><strong>Hiccup</strong></a> - June 10, 2012</small>
@@ -203,7 +204,7 @@
                                               </li>
                                               <li class="even">
                                                 <div class="entry_wrap">
-                                                <div class="entry_img"><img src="images/thumbs/image2.png" alt="" /></div>
+                                                <div class="entry_img"><img src="${pageContext.request.contextPath}/static/images/thumbs/image2.png" alt="" /></div>
                                                 <div class="entry_content">
                                                     <h4><a href="">We Are About Color</a></h4>
                                                     <small>Submitted by: <a href=""><strong>Hiccup</strong></a> - June 10, 2012</small>
@@ -214,7 +215,7 @@
                                               </li>
                                               <li>
                                                 <div class="entry_wrap">
-                                                <div class="entry_img"><img src="images/thumbs/image3.png" alt="" /></div>
+                                                <div class="entry_img"><img src="${pageContext.request.contextPath}/static/images/thumbs/image3.png" alt="" /></div>
                                                 <div class="entry_content">
                                                     <h4><a href="">Ancient Technology</a></h4>
                                                     <small>Submitted by: <a href=""><strong>Hiccup</strong></a> - June 10, 2012</small>
@@ -225,7 +226,7 @@
                                               </li>
                                               <li class="even">
                                                 <div class="entry_wrap">
-                                                <div class="entry_img"><img src="images/thumbs/image4.png" alt="" /></div>
+                                                <div class="entry_img"><img src="${pageContext.request.contextPath}/static/images/thumbs/image4.png" alt="" /></div>
                                                 <div class="entry_content">
                                                     <h4><a href="">Bird's Nest Soup</a></h4>
                                                     <small>Submitted by: <a href=""><strong>Hiccup</strong></a> - June 10, 2012</small>
@@ -309,28 +310,28 @@
                             <div class="widgetcontent userlistwidget nopadding">
                                 <ul>
                                     <li>
-                                        <div class="avatar"><img alt="" src="images/thumbs/avatar1.png" /></div>
+                                        <div class="avatar"><img alt="" src="${pageContext.request.contextPath}/static/images/thumbs/avatar1.png" /></div>
                                         <div class="info">
                                             <a href="">Squint</a> <br />
                                             Front-End Engineer <br /> 18 minutes ago
                                         </div><!--info-->
                                     </li>
                                     <li>
-                                        <div class="avatar"><img alt="" src="images/thumbs/avatar2.png" /></div>
+                                        <div class="avatar"><img alt="" src="${pageContext.request.contextPath}/static/images/thumbs/avatar2.png" /></div>
                                         <div class="info">
                                             <a href="">Eunice</a> <br />
                                             Architectural Designer <br /> 18 minutes ago
                                         </div><!--info-->
                                     </li>
                                     <li>
-                                        <div class="avatar"><img alt="" src="images/thumbs/avatar1.png" /></div>
+                                        <div class="avatar"><img alt="" src="${pageContext.request.contextPath}/static/images/thumbs/avatar1.png" /></div>
                                         <div class="info">
                                             <a href="">Captain Gutt</a> <br />
                                             Software Engineer <br /> 18 minutes ago
                                         </div><!--info-->
                                     </li>
                                     <li>
-                                        <div class="avatar"><img alt="" src="images/thumbs/avatar2.png" /></div>
+                                        <div class="avatar"><img alt="" src="${pageContext.request.contextPath}/static/images/thumbs/avatar2.png" /></div>
                                         <div class="info">
                                             <a href="">Flynn</a> <br />
                                             Accounting Manager <br /> 18 minutes ago

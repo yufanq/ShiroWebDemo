@@ -3,6 +3,8 @@ package com.yufan.service;
 import java.util.List;
 import java.util.Set;
 
+import com.yufan.bean.JurisdictionBean;
+import com.yufan.bean.Page;
 import com.yufan.entity.Jurisdiction;
 import com.yufan.entity.Role;
 
@@ -28,5 +30,10 @@ public interface JurisdictionService {
      * @return
      */
     List<Jurisdiction> findMenus(Set<String> permissions);
-
+    
+    List<Jurisdiction> queryJurisdictionByParentid(Integer parentid);
+    
+    List<Jurisdiction> findLists(Set<String> permissions,Integer parentid);
+    
+    JurisdictionBean queryJurisdictionByPage(Page page);
 }

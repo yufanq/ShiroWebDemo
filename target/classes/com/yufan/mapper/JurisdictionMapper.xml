@@ -5,17 +5,34 @@
     <id column="j_id" jdbcType="INTEGER" property="jId" />
     <result column="j_name" jdbcType="VARCHAR" property="jName" />
     <result column="l_type" jdbcType="VARCHAR" property="lType" />
+    <result column="l_parent" jdbcType="INTEGER" property="jParent"/>
     <result column="l_uri" jdbcType="VARCHAR" property="lUri" />
+    <result column="l_style" jdbcType="VARCHAR" property="lStyle"/>
     <result column="l_permission" jdbcType="VARCHAR" property="lPermission" />
     <result column="l_available" jdbcType="TINYINT" property="lAvailable" />
   </resultMap>
   <sql id="Base_Column_List">
-    j_id, j_name, l_type, l_uri, l_permission, l_available
+    j_id, j_name, l_type, l_parent, l_uri, l_style,l_permission, l_available
   </sql>
   <select id="selectAllJurisdiction" resultMap="BaseResultMap">
      select 
     <include refid="Base_Column_List" />
     from jurisdiction
+  </select>
+  <select id="selectjurisdictionCount" resultType="Integer">
+  		select count(*) from jurisdiction
+  </select>
+  <select id="selectAllJurisdictionByPage" resultMap="BaseResultMap">
+      select 
+    <include refid="Base_Column_List" />
+    from jurisdiction
+    limit #{start},#{end}
+  </select>
+  <select id="selectJurisdictionByParentid" resultMap="BaseResultMap">
+  	  select 
+    <include refid="Base_Column_List" />
+    from jurisdiction
+    where l_parent = #{parentid,jdbcType=INTEGER}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,11 +45,11 @@
     where j_id = #{jId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.yufan.entity.Jurisdiction">
-    insert into jurisdiction (j_id, j_name, l_type, 
-      l_uri, l_permission, l_available
+    insert into jurisdiction (j_id, j_name, l_type, l_parent
+      l_uri, l_style,l_permission, l_available
       )
-    values (#{jId,jdbcType=INTEGER}, #{jName,jdbcType=VARCHAR}, #{lType,jdbcType=VARCHAR}, 
-      #{lUri,jdbcType=VARCHAR}, #{lPermission,jdbcType=VARCHAR}, #{lAvailable,jdbcType=TINYINT}
+    values (#{jId,jdbcType=INTEGER}, #{jName,jdbcType=VARCHAR}, #{lType,jdbcType=VARCHAR}, #{jParent,jdbcType=INTEGER},
+      #{lUri,jdbcType=VARCHAR}, #{lStyle,jdbcType=VARCHAR},#{lPermission,jdbcType=VARCHAR}, #{lAvailable,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.yufan.entity.Jurisdiction">
@@ -47,8 +64,14 @@
       <if test="lType != null">
         l_type,
       </if>
+      <if test="lParent != null">
+        l_parent,
+      </if>
       <if test="lUri != null">
         l_uri,
+      </if>
+       <if test="lStyle != null">
+        l_style,
       </if>
       <if test="lPermission != null">
         l_permission,
@@ -67,8 +90,14 @@
       <if test="lType != null">
         #{lType,jdbcType=VARCHAR},
       </if>
+      <if test="lParent != null">
+      #{jParent,jdbcType=INTEGER},
+      </if>
       <if test="lUri != null">
         #{lUri,jdbcType=VARCHAR},
+      </if>
+       <if test="lStyle != null">
+        #{lStyle,jdbcType=VARCHAR},
       </if>
       <if test="lPermission != null">
         #{lPermission,jdbcType=VARCHAR},
@@ -87,8 +116,14 @@
       <if test="lType != null">
         l_type = #{lType,jdbcType=VARCHAR},
       </if>
+      <if test="lParent != null">
+    	l_parent = #{jParent,jdbcType=INTEGER},
+      </if>
       <if test="lUri != null">
         l_uri = #{lUri,jdbcType=VARCHAR},
+      </if>
+        <if test="lStyle != null">
+        l_style = #{lStyle,jdbcType=VARCHAR},
       </if>
       <if test="lPermission != null">
         l_permission = #{lPermission,jdbcType=VARCHAR},
@@ -103,7 +138,9 @@
     update jurisdiction
     set j_name = #{jName,jdbcType=VARCHAR},
       l_type = #{lType,jdbcType=VARCHAR},
+      l_parent = #{jParent,jdbcType=INTEGER},
       l_uri = #{lUri,jdbcType=VARCHAR},
+      l_style = #{lStyle,jdbcType=VARCHAR},
       l_permission = #{lPermission,jdbcType=VARCHAR},
       l_available = #{lAvailable,jdbcType=TINYINT}
     where j_id = #{jId,jdbcType=INTEGER}
