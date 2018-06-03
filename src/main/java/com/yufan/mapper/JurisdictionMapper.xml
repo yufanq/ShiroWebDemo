@@ -22,6 +22,12 @@
   <select id="selectjurisdictionCount" resultType="Integer">
   		select count(*) from jurisdiction
   </select>
+  <select id="selectJurisdictionByBelongtoRole" resultMap="BaseResultMap">
+   	select j.*
+    from  role r inner join role_jurisdiction rj on r.r_id = rj.r_id
+  		inner join jurisdiction j on j.j_id = rj.j_id
+  	where r.r_id = #{rId}
+  </select>
   <select id="selectAllJurisdictionByPage" resultMap="BaseResultMap">
       select 
     <include refid="Base_Column_List" />

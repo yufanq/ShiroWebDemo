@@ -44,12 +44,11 @@ public class IndexController {
         	List<Jurisdiction> findLists2 = jurisdictionService.findLists(permissions, jurisdiction.getjParent());
         	//
         	List<Jurisdiction> findLists = jurisdictionService.findLists(permissions, jurisdiction.getjId());
-			System.out.println(findLists);
-        	session.setAttribute(jurisdiction.getlUri()+"lists", findLists);
+			session.setAttribute(jurisdiction.getlUri()+"lists", findLists);
 		
         }
         session.setAttribute("menus", menus);
-        session.setAttribute("menus", menus);
+        System.out.println(menus);
         return "aindex";
     }
 

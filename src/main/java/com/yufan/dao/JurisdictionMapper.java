@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.yufan.entity.Jurisdiction;
+import com.yufan.entity.Role;
 
 public interface JurisdictionMapper {
     int deleteByPrimaryKey(Integer jId);
@@ -26,5 +27,6 @@ public interface JurisdictionMapper {
     Integer selectjurisdictionCount();
     
     List<Jurisdiction> selectAllJurisdictionByPage(@Param("start")Integer start,@Param("end") Integer end);
-    
+   
+    List<Jurisdiction> selectJurisdictionByBelongtoRole(Role role);
 }

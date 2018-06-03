@@ -13,6 +13,7 @@ import com.yufan.bean.JurisdictionBean;
 import com.yufan.bean.Page;
 import com.yufan.dao.JurisdictionMapper;
 import com.yufan.entity.Jurisdiction;
+import com.yufan.entity.Role;
 import com.yufan.service.JurisdictionService;
 @Service
 public class JurisdictionServiceImpl implements JurisdictionService{
@@ -102,10 +103,26 @@ public class JurisdictionServiceImpl implements JurisdictionService{
 		jurisdictionBean.setJurisdictionList(jurisdictionMapper.selectAllJurisdictionByPage(page.getStart(), page.getEnd()));
 		// 设置 总条数
 		jurisdictionBean.setTotalPage(jurisdictionMapper.selectjurisdictionCount());
-		
+		System.out.println("liebiao:"+ jurisdictionBean.getJurisdictionList());
 		page.setTotalCount(jurisdictionBean.getTotalPage());
 		
 		return jurisdictionBean;
+	}
+	@Override
+	public List<Jurisdiction> queryJurisdictionByBolongtoRole(Role role) {
+		
+		return jurisdictionMapper.selectJurisdictionByBelongtoRole(role);
+	}
+	@Override
+	public List<Jurisdiction> queryJurisdictionNoByBolongtoRole(Role role) {
+		// 该角色所拥有的权限列表
+		List<Jurisdiction> selectJurisdictionByBelongtoRole = jurisdictionMapper.selectJurisdictionByBelongtoRole(role);
+		// 权限表中的所有权限
+		List<Jurisdiction> selectAllJurisdiction = jurisdictionMapper.selectAllJurisdiction();
+		// 不属于该角色的权限
+		selectAllJurisdiction.removeAll(selectJurisdictionByBelongtoRole); // 删除已经拥有的权限	
+			// 剩下的都是 未拥有的权限
+		return selectAllJurisdiction;
 	}
 
 }

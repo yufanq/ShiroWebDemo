@@ -36,4 +36,9 @@ public interface JurisdictionService {
     List<Jurisdiction> findLists(Set<String> permissions,Integer parentid);
     
     JurisdictionBean queryJurisdictionByPage(Page page);
+    
+    List<Jurisdiction> queryJurisdictionByBolongtoRole(Role role);
+    
+    List<Jurisdiction> queryJurisdictionNoByBolongtoRole(Role role);
+    
 }

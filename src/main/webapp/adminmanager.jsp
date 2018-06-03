@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <th class="head1">管理员密码</th>
                                             <th class="head1">管理员昵称</th>
                                             <th class="head1">是否锁定</th>
-                                            <th class="head0" colspan="2">操作</th>
+                                            <th class="head1" >操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -96,12 +96,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td>${a.aLocked }</td>
                                             <td>
                                             	 <shiro:hasPermission name="jurisdiction:admin:update">
-                                            		<button> 修改</button> 
+                                            		<a>修改</a>
                                              	</shiro:hasPermission>
-                                            </td>
-                                            <td>
                                             		<shiro:hasPermission name="jurisdiction:admin:delete">
-                                            			<button> 删除</button> 
+                                            			<a>删除</a>
                                              		</shiro:hasPermission>
                                              </td>
                                         </tr>

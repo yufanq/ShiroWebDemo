@@ -7,6 +7,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,6 +60,31 @@ public class AdminManagerController {
 		}
 		return "redirect:/admin";
 	}
+	@RequiresPermissions("jurisdiction:admin:delete")
+	@RequestMapping(method = RequestMethod.POST, value = "/{id}/delete")
+	public void adminDelete(@PathVariable("id") Integer id,Model model){
+		// Ajax
+		try{
+			// 删除 管理员
+			adminService.deleteAdmin(id);
+			
+		} catch(Exception e){
+			
+		}
+	}
 	
+	@RequiresPermissions("jurisdiction:admin:update")
+	@RequestMapping(method = RequestMethod.POST,value = "/{id}/update")
+	public void adminUpdate(@PathVariable("id") Integer id, Admin admin ,Model model){
+		// Ajax
+		try {
+			admin.setaId(id);
+			// 更新
+			adminService.updateAdmin(admin);
+			
+		} catch (Exception e) {
+
+		}
+	}
 	
 }

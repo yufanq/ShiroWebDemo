@@ -21,6 +21,7 @@ public class JurisdictionManagerController {
 	@RequiresPermissions("jurisdiction:jurisdiction:view")
 	@RequestMapping(method = RequestMethod.GET)
 	public String jurisdictionList(Model model,Page page){
+	
 		model.addAttribute("jurisdictionList", jurisdictionService.queryJurisdictionByPage(page).getJurisdictionList());
 		return "jurisdictionmanager";
 	}

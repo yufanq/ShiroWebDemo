@@ -3,6 +3,9 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -48,9 +51,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="pagedesc">The content below are loaded using inline data</span>
             
             <ul class="hornav">
-                <li class="current"><a href="#basicform">角色列表</a></li>
-                <li><a href="#validation">角色权限</a></li>
+            <shiro:hasPermission name="jurisdiction:role:view">
+              <li class="current"><a href="#basicform">角色列表</a></li>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="jurisdiction:role:accredit">
+                <li><a href="#validation">角色权限管理</a></li>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="jurisdiction:role:create">
                 <li><a href="#create">角色添加</a></li>  
+            </shiro:hasPermission>
             </ul>
         </div><!--pageheader-->
         
@@ -71,16 +80,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <tr>
                                             <th class="head0">角色id</th>
                                             <th class="head1">角色名称</th>
-                                            <th class="head0" colspan="2">操作</th>
+                                            <th class="head1">是否可用</th>
+                                            <th class="head1">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>01/12/12</td>
-                                            <td>10</td>
-                                            <td><a>修改</a></td>
-                                            <td><a>删除</a></td>
+                                        	<c:forEach items="${ roleList }" var="r">
+                                        	   <td>${ r.rId }</td>
+                                           	  <td>${r.rName }</td>
+                                           	  <td>${r.rAvailable }</td>
+                                            <td>
+                                            <shiro:hasPermission name="jurisdiction:role:update">
+                                             	<a>修改</a>
+                                            </shiro:hasPermission>
+                                            <shiro:hasPermission name="jurisdiction:role:delete">
+                                            	 <a>删除</a>
+                                            </shiro:hasPermission>
+                                           </td>
+                                         
                                         </tr>
+                                           
+                                        	</c:forEach>
+                                        
                                     </tbody>
                                 </table>
                             </div><!--widgetcontent-->
@@ -108,9 +130,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	<label>角色选择</label>
                         	   <span class="formwrapper">
                             	<select data-placeholder="选择角色" class="chzn-select" style="width:350px;" tabindex="2">
-                                <option value="">角色 One</option>
-                                <option value="">角色Two</option>
-                                <option value="">角色Three</option>
+                         			<c:forEach items="${roleSelectList }" var="rl">
+                         		      	<option value="${ rl.rId }">${ rl.rName }</option>
+                         			</c:forEach>
                             </select>
                             </span>
                         </p>
@@ -120,8 +142,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	
                             <span id="dualselect" class="dualselect">
                            	<select class="uniformselect" name="select3" multiple="multiple" size="10">
-                                    <option value="">权限 One</option>
-                                    <option value="">权限 Two</option>
+                                       	<c:forEach items="${noBelongRole }" var="b">
+                                	 <option value="${ b.jId }">${b.jName }</option>
+                                    </c:forEach>
                                 </select>
                                
                                 <span  class="ds_arrow">
@@ -129,9 +152,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                      <span class="arrow ds_next">&raquo;</span>
                                 </span>
                                 <select  name="select4" multiple="multiple" size="10">
-                                	 <option value="">权限 Six</option>
-                                    <option value="">权限 Seven</option>
-                                    <option value="">权限 Eight</option>
+                                	<c:forEach items="${belongRole }" var="b">
+                                	 <option value="${ b.jId }">${b.jName }</option>
+                                    </c:forEach>
                                 </select>
                             </span>
                         </p>

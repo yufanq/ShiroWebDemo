@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -6,14 +7,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Forms | Amanda Admin Template</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.default.css" type="texsrc="${pageContext.request.contextPath}/static/${pageContext.request.contextPath}/static/" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.default.css" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/jquery.cookie.js"></script>
@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/custom/general.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/custom/forms.js"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/custom/elements.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/staticjs/custom/elements.js"></script>
 
 <!--[if IE 9]>
     <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" media="screen" href="css/style.ie8.css"/>
 <![endif]-->
 <!--[if lt IE 9]>
-	<script src="${pageContext.request.contextPath}/static/http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
 </head>
 
@@ -51,6 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <h1 class="pagetitle">权限</h1>
             <span class="pagedesc">The content below are loaded using inline data</span>
             
+                 
             <ul class="hornav">
              	<shiro:hasPermission name="jurisdiction:role:view">
              		<li class="current"><a href="#basicform">权限列表</a></li>
@@ -76,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th class="head0">权限id</th>
+                                              <th class="head0">权限id</th>
                                             <th class="head1">权限名称</th>
                                             <th class="head1">权限类型</th>
                                             <th class="head1">权限父id</th>
@@ -84,11 +85,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <th class="head1">权限样式</th>
                                             <th class="head1">权限值</th>
                                             <th class="head1">权限是否可用</th>
-                                            <th class="head0" colspan="2">操作</th>
+                                            <th class="head1" >操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                        		     <c:forEach items="${jurisdictionList }" var="j">
+                                       <c:forEach items="${jurisdictionList }" var="j">
                                         	<tr>
                                             	<td>${ j.jId }</td>
                                             	<td>${ j.jName }</td>
@@ -100,12 +101,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             	<td>${ j.lAvailable }</td>
                                         	          <td>
                                             	 <shiro:hasPermission name="jurisdiction:role:update">
-                                            		<button> 修改</button> 
+                                            		<a>修改</a>
                                              	</shiro:hasPermission>
-                                            </td>
-                                            <td>
-                                            		<shiro:hasPermission name="jurisdiction:role:delete">
-                                            			<button> 删除</button> 
+                                          		<shiro:hasPermission name="jurisdiction:role:delete">
+                                            		<a>删除</a>
                                              		</shiro:hasPermission>
                                              </td>
                                 	        </tr>
@@ -117,25 +116,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <br />
                     
                     <ul class="pagination pagination2">
-                    	<li class="first"><a href="" class="disable">&laquo;</a></li>
-                        <li class="previous"><a href="" class="disable">&lsaquo;</a></li>
-                    	<li><a href="" class="current">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
-                        <li class="next"><a href="">&rsaquo;</a></li>
-                        <li class="last"><a href="">&raquo;</a></li>
+                    	当前第<strong> ${requestScope.page.pageIndex}</strong> 页，共 <strong>${requestScope.page.pageCount}</strong> 页
+                    	<li class="first"><a href="${pageContext.request.contextPath}/jurisdiction?pageIndex=1" class="disable">&laquo;</a></li>
+                        <li class="previous"><a href="${pageContext.request.contextPath}/jurisdiction?pageIndex=${requestScope.page.pageIndex - 1 }" class="disable">&lsaquo;</a></li>
+                    	<li><a href="${pageContext.request.contextPath}/jurisdiction?pageIndex=${requestScope.page.pageIndex}" class="current"> ${requestScope.page.pageIndex}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/jurisdiction?pageIndex=${requestScope.page.pageIndex + 1}"> ${requestScope.page.pageIndex + 1}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/jurisdiction?pageIndex=${requestScope.page.pageIndex + 2}"> ${requestScope.page.pageIndex + 2}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/jurisdiction?pageIndex=${requestScope.page.pageIndex + 3}"> ${requestScope.page.pageIndex + 3}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/jurisdiction?pageIndex=${requestScope.page.pageIndex + 4}"> ${requestScope.page.pageIndex + 4}</a></li>
+                        <li class="next"><a href="${pageContext.request.contextPath}/jurisdiction?pageIndex=${requestScope.page.pageIndex + 1}">&rsaquo;</a></li>
+                        <li class="last"><a href="${pageContext.request.contextPath}/jurisdiction?pageIndex=${requestScope.page.pageCount}">&raquo;</a></li>
                     </ul>
                     <br />
       </div><!--subcontent-->
          
          
             <div id="validation" class="subcontent" style="display: none">
-                   <form class="stdform" action="" method="post">
+                   <form class="stdform" action="${pageContext.request.contextPath}/static/jurisdiction/addJurisdiction" method="post">
                         <p>
                         	<label>权限名称</label>
-                            <span class="field"><input type="text" name="firstname" id="firstname2" class="longinput" /></span>
+                            <span class="field"><input type="text" name="jName" id="firstname2" class="longinput" /></span>
                         </p>
                           <p class="stdformbutton">
                         	<button class="submit radius2">提交</button>

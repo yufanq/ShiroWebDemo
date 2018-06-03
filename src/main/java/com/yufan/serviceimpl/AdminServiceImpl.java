@@ -38,8 +38,8 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 	@Override
-	public void deleteAdmin(Admin admin) {
-		adminMapper.deleteByPrimaryKey(admin.getaId());
+	public void deleteAdmin(Integer id) {
+		adminMapper.deleteByPrimaryKey(id);
 		
 	}
 	@Override

@@ -28,7 +28,7 @@ public interface AdminService {
 
 	void updateAdmin(Admin admin);
 	
-	void deleteAdmin(Admin admin);
+	void deleteAdmin(Integer id);
 	
 	List<Admin> queryAllAdmin();
 
