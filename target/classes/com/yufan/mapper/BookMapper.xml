@@ -8,6 +8,27 @@
   <sql id="Base_Column_List">
     b_id, b_name
   </sql>
+  <select id="selectALLBooks" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from book
+  </select>
+  <select id="selectBooksByPage" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from book
+    limit #{start},#{end}
+  </select>
+  <select id="selectBooksCount" resultType="java.lang.Integer">
+  	select count(*) 
+  	from book
+  </select>
+  <select id="selectBookByProfession" resultMap="BaseResultMap">
+  	select b.*
+  	from book b inner join profession_book pb on b.b_id = pb.b_id 
+  		inner join profession p on p.p_id = pb.p_id
+  		where p.p_id = #{pId}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

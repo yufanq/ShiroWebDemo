@@ -82,7 +82,4 @@ jQuery(document).ready(function(){
 	});
 	
 	
-	///// SELECT WITH SEARCH /////
-	jQuery(".chzn-select").chosen();
-	
 });

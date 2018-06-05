@@ -32,7 +32,7 @@ public interface AdminService {
 	
 	List<Admin> queryAllAdmin();
 
-	
+	Admin queryAdminById(Integer id);
 	Admin queryAdmin(String username);
 	Set<String> queryRoles(String username);
 	Set<String> queryJurisdiction(String username);

@@ -107,20 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </table>
                             </div><!--widgetcontent-->
                         </div><!--widgetbox-->
-                        <br />
-                    
-                    <ul class="pagination pagination2">
-                    	<li class="first"><a href="" class="disable">&laquo;</a></li>
-                        <li class="previous"><a href="" class="disable">&lsaquo;</a></li>
-                    	<li><a href="" class="current">1</a></li>
-                        <li><a href="">2</a></li>
-                        <li><a href="">3</a></li>
-                        <li><a href="">4</a></li>
-                        <li><a href="">5</a></li>
-                        <li class="next"><a href="">&rsaquo;</a></li>
-                        <li class="last"><a href="">&raquo;</a></li>
-                    </ul>
-                    <br />
+             
       </div><!--subcontent-->
          
          

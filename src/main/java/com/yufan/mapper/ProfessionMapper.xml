@@ -8,6 +8,21 @@
   <sql id="Base_Column_List">
     p_id, p_name
   </sql>
+  <select id="selectALLProfession" resultMap="BaseResultMap">
+  	   select 
+    <include refid="Base_Column_List" />
+    from profession
+  </select>
+  <select id="selectProfessionByBean" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from profession
+    limit #{start},#{end}
+  </select>
+  <select id="selectProfessionCount" resultType="java.lang.Integer">
+  	select count(*) 
+  		from profession
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

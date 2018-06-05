@@ -13,6 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Forms | Amanda Admin Template</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.default.css" type="text/css" />
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/page/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/page/adminmanager.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/jquery.cookie.js"></script>
@@ -26,18 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/custom/general.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/custom/forms.js"></script>
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/custom/elements.js"></script>
 
-<!--[if IE 9]>
-    <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
-<![endif]-->
-<!--[if IE 8]>
-    <link rel="stylesheet" media="screen" href="css/style.ie8.css"/>
-<![endif]-->
-<!--[if lt IE 9]>
-	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-<![endif]-->
+
 </head>
 
 <body class="withvernav">
@@ -122,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                          <p>
                         	<label>管理员选择</label>
                         	   <span class="formwrapper">
-                            	<select data-placeholder="选择管理员" class="chzn-select" style="width:350px;" tabindex="2">
+                            	<select id="selctAdmin" data-placeholder="选择管理员" class="chzn-select" style="width:350px;" tabindex="2">
                                		<c:forEach items="${adminRoleList }" var="arl">
                                				<option value="${ arl.aId }">${ arl.aNickname } ${ arl.aAccount }</option>
                               		</c:forEach>

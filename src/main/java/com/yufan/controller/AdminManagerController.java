@@ -1,7 +1,12 @@
 package com.yufan.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.alibaba.fastjson.JSON;
+import com.yufan.bean.ObjectBelongtoBean;
 import com.yufan.entity.Admin;
 import com.yufan.entity.Jurisdiction;
+import com.yufan.entity.Role;
 import com.yufan.service.AdminService;
 import com.yufan.service.JurisdictionService;
 import com.yufan.service.RoleService;
@@ -22,7 +30,7 @@ import com.yufan.view.bind.annotation.CurrentUser;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminManagerController {
+public class AdminManagerController<E> {
 
 	@Autowired
 	private AdminService adminService; // 管理员服务
@@ -86,5 +94,36 @@ public class AdminManagerController {
 
 		}
 	}
-	
+	/**
+	 * @throws IOException 
+	 * 
+	* @Title: selctAdminRole  
+	* @Description:  ajax 
+	* @param @param id
+	* @param @param model    参数  
+	* @return void    返回类型  
+	* @throws
+	 */
+	@RequiresPermissions("jurisdiction:role:accredit")
+	@RequestMapping(method = RequestMethod.GET,value = "/{id}/selctAdminRole")
+	public void selctAdminRole(@PathVariable("id")Integer id,Model model,HttpServletResponse response) throws IOException{
+		// 设置 字符集
+		response.setContentType("text/text;charset=UTF-8");
+		//  打印出去
+		PrintWriter out = response.getWriter();
+		// 需要查询的 管理员信息
+		Admin adminById = adminService.queryAdminById(id);
+		// 该管理员的角色
+		List<Role> queryRoleByBelongtoAdmin = roleService.queryRoleByBelongtoAdmin(adminById);
+		 // 不属于该管理员的角色
+		List<Role> queryRoleByNoBelongtoAdmin = roleService.queryRoleByNoBelongtoAdmin(adminById);
+		// 将两个 list 绑定到一起
+		ObjectBelongtoBean<Role> objectBelongtoBean = new ObjectBelongtoBean<Role>(queryRoleByBelongtoAdmin, queryRoleByNoBelongtoAdmin);
+		 // 将数据转换成 json  
+		String jsonString = JSON.toJSONString(objectBelongtoBean);
+		System.out.println(jsonString);
+		// 打印数据
+		out.print(jsonString);
+		
+	}
 }

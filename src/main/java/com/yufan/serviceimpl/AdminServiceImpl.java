@@ -70,6 +70,10 @@ public class AdminServiceImpl implements AdminService{
 		}
 		return js;
 	}
+	@Override
+	public Admin queryAdminById(Integer id) {
+		return adminMapper.selectByPrimaryKey(id);
+	}
 	
 
 }
