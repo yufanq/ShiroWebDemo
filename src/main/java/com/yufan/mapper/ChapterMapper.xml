@@ -4,11 +4,23 @@
   <resultMap id="BaseResultMap" type="com.yufan.entity.Chapter">
     <id column="c_id" jdbcType="INTEGER" property="cId" />
     <result column="b_id" jdbcType="INTEGER" property="bId" />
+    <result column="c_number" jdbcType="INTEGER" property="cNumber" />
     <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <collection property="kldpoints" ofType="Kldpoint">
+ 	    	 <id column="p_id" jdbcType="INTEGER" property="pId" />
+  	 	     <result column="p_name" jdbcType="VARCHAR" property="pName" />
+  		     <result column="p_content" jdbcType="VARCHAR" property="pContent" />
+  	  	     <result column="c_id" jdbcType="INTEGER" property="cId" />
+ 	   </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    c_id, b_id, c_name
+    c_id, b_id,c_number, c_name
   </sql>
+  <select id="selectChapterByBookId" resultMap="BaseResultMap">
+  	 select  c.*,k.*
+  	 	 from chapter c  left join kldpoint k on c.c_id = k.c_id
+   		  where c.b_id = #{id}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -59,11 +59,13 @@ public class BookServiceImpl implements BookService{
 	public List<Book> queryBookByNoBelongToSpecialty(Profession profession) {
 		// 所有图书
 		List<Book> selectALLBooks = bookMapper.selectALLBooks();
+		System.out.println("所有" + selectALLBooks);
 		// 拥有图书
 		List<Book> selectBookByProfession = bookMapper.selectBookByProfession(profession);
+		System.out.println("拥有：" +selectBookByProfession);
 		// 未拥有图书
-		selectALLBooks.removeAll(selectBookByProfession);
-		
+		boolean removeAll = selectALLBooks.removeAll(selectBookByProfession);
+		System.out.println("是否"+ removeAll +"未拥有" + selectALLBooks);
 		return selectALLBooks;
 	}
 

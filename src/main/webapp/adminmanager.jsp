@@ -123,6 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </select>
                             </span>
                         </p>
+                        
                         <p>
                         	<label>角色选择</label>
                             <span id="dualselect" class="dualselect">

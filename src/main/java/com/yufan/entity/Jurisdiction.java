@@ -99,6 +99,72 @@ public class Jurisdiction {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((jId == null) ? 0 : jId.hashCode());
+		result = prime * result + ((jName == null) ? 0 : jName.hashCode());
+		result = prime * result + ((jParent == null) ? 0 : jParent.hashCode());
+		result = prime * result
+				+ ((lAvailable == null) ? 0 : lAvailable.hashCode());
+		result = prime * result
+				+ ((lPermission == null) ? 0 : lPermission.hashCode());
+		result = prime * result + ((lStyle == null) ? 0 : lStyle.hashCode());
+		result = prime * result + ((lType == null) ? 0 : lType.hashCode());
+		result = prime * result + ((lUri == null) ? 0 : lUri.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Jurisdiction other = (Jurisdiction) obj;
+		if (jId == null) {
+			if (other.jId != null)
+				return false;
+		} else if (!jId.equals(other.jId))
+			return false;
+		if (jName == null) {
+			if (other.jName != null)
+				return false;
+		} else if (!jName.equals(other.jName))
+			return false;
+		if (jParent == null) {
+			if (other.jParent != null)
+				return false;
+		} else if (!jParent.equals(other.jParent))
+			return false;
+		if (lAvailable == null) {
+			if (other.lAvailable != null)
+				return false;
+		} else if (!lAvailable.equals(other.lAvailable))
+			return false;
+		if (lPermission == null) {
+			if (other.lPermission != null)
+				return false;
+		} else if (!lPermission.equals(other.lPermission))
+			return false;
+		if (lStyle == null) {
+			if (other.lStyle != null)
+				return false;
+		} else if (!lStyle.equals(other.lStyle))
+			return false;
+		if (lType != other.lType)
+			return false;
+		if (lUri == null) {
+			if (other.lUri != null)
+				return false;
+		} else if (!lUri.equals(other.lUri))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return "Jurisdiction [jId=" + jId + ", jName=" + jName + ", lType="
 				+ lType + ", jParent=" + jParent + ", lUri=" + lUri

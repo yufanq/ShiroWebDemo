@@ -14,7 +14,6 @@ jQuery(document).ready(function(){
 	///// FORM TRANSFORMATION /////
 	jQuery('input:checkbox, input:radio, select.uniformselect, select.aaaauniformselectinput:file').uniform();
 
-	dualselect
 	///// DUAL BOX /////
 	var db = jQuery('#dualselect').find('.ds_arrow .arrow');	//get arrows of dual select
 	var sel1 = jQuery('#dualselect select:first-child');		//get first select element

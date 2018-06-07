@@ -69,9 +69,9 @@ public class SpecialtyServiceImpl implements SpecialtyService{
 		return professionMapper.selectALLProfession();
 	}
 	@Override
-	public Profession querySpecialtyById(Profession profession) {
+	public Profession querySpecialtyById(Integer id) {
 		
-		return professionMapper.selectByPrimaryKey(profession.getpId());
+		return professionMapper.selectByPrimaryKey(id);
 	}
 
 }

@@ -26,4 +26,6 @@ public interface RoleService {
 	List<Role> queryRoleByNoBelongtoAdmin(Admin admin);
 	
 	List<Role> queryRoleByBelongtoAdmin(Admin admin);
+	
+	Role queryRoleByid(Integer id);
 }

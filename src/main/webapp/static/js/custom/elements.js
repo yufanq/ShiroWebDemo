@@ -308,18 +308,7 @@ jQuery(document).ready(function(){
 	///// SORTABLE ITEM /////
 	jQuery("#sortable, #sortable2").sortable();
 	
-	///// SORTABLE ITEM WITH DETAILS /////
-	jQuery('.arrowdrop').click(function(){
-		var t = jQuery(this);
-		var det = t.parents('li').find('.details');
-		if(!det.is(':visible')) {
-			det.slideDown();
-			t.addClass('arrowup');
-		} else {
-			det.slideUp();
-			t.removeClass('arrowup');
-		}
-	});
+
 
 
 });

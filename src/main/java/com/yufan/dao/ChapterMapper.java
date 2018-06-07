@@ -1,5 +1,7 @@
 package com.yufan.dao;
 
+import java.util.List;
+
 import com.yufan.entity.Chapter;
 
 public interface ChapterMapper {
@@ -14,4 +16,8 @@ public interface ChapterMapper {
     int updateByPrimaryKeySelective(Chapter record);
 
     int updateByPrimaryKey(Chapter record);
+    
+    List<Chapter> selectChapterByBookId(Integer id);
+    
+    
 }

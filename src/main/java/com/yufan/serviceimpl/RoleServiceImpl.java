@@ -49,31 +49,23 @@ public class RoleServiceImpl implements RoleService{
 
 	@Override
 	public List<Role> queryRoleByNoBelongtoAdmin(Admin admin) {	
-		// 不属于管理员的角色
-		List<Role> list = new ArrayList<Role>();
 		// 管理员拥有的角色
 		List<Role> selectRoleBybelongtoAdmin = roleMapper.selectRoleBybelongtoAdmin(admin);
-		System.out.println("roles:"+ selectRoleBybelongtoAdmin);
+		 // 所有角色
 		List<Role> queryAllRole = queryAllRole();
-		System.out.println("all:" + queryAllRole);
-		for (Role role : queryAllRole) {
-			boolean flag = true;
-			for (Role role1 : selectRoleBybelongtoAdmin) {
-				if(role.getrId()  == role1.getrId()){ // 说明包含
-					flag = false; // 假
-					break; // 跳出
-				}
-			}
-			if(flag){
-				list.add(role);
-			}
-		}
-		return list;
+		// 不属于管理员的角色
+		queryAllRole.removeAll(selectRoleBybelongtoAdmin);
+		return queryAllRole;
 	}
 
 	@Override
 	public List<Role> queryRoleByBelongtoAdmin(Admin admin) {
 		return roleMapper.selectRoleBybelongtoAdmin(admin);
+	}
+
+	@Override
+	public Role queryRoleByid(Integer id) {
+		return roleMapper.selectByPrimaryKey(id);
 	}
 
 }

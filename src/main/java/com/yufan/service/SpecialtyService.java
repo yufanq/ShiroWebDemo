@@ -69,10 +69,10 @@ public interface SpecialtyService {
 	 * 
 	* @Title: querySpecialtyById  
 	* @Description:  根据id 查询
-	* @param @param profession
+	* @param @param Integer 
 	* @param @return    参数  
 	* @return Profession    返回类型  
 	* @throws
 	 */
-	Profession querySpecialtyById(Profession profession);
+	Profession querySpecialtyById(Integer id);
 }

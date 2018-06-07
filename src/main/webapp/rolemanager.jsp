@@ -12,7 +12,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Forms | Amanda Admin Template</title>
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.default.css" type="text/css" />
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/page/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/page/rolemanager.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/plugins/jquery.cookie.js"></script>

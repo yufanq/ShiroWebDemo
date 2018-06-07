@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.yufan.entity.Book">
     <id column="b_id" jdbcType="INTEGER" property="bId" />
     <result column="b_name" jdbcType="VARCHAR" property="bName" />
+
   </resultMap>
   <sql id="Base_Column_List">
     b_id, b_name
