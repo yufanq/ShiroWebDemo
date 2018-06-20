@@ -1,5 +1,9 @@
 package com.yufan.shiro.filter;
 
+import java.util.List;
+import java.util.Set;
+
+import com.yufan.entity.Jurisdiction;
 import com.yufan.service.AdminService;
 import com.yufan.view.bind.annotation.Constants;
 
@@ -25,6 +29,7 @@ public class SysUserFilter extends PathMatchingFilter {
 
         String username = (String)SecurityUtils.getSubject().getPrincipal();
         request.setAttribute(Constants.CURRENT_USER, adminService.queryAdmin(username));
+   
         return true;
     }
 }

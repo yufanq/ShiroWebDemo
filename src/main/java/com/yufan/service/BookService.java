@@ -25,7 +25,7 @@ public interface BookService {
 	* @return void    返回类型  
 	* @throws
 	 */
-	void createBook(Book book);
+	int createBook(Book book);
 	/**
 	 * 
 	* @Title: updateBook  
@@ -34,7 +34,7 @@ public interface BookService {
 	* @return void    返回类型  
 	* @throws
 	 */
-	void updateBook(Book book);
+	int updateBook(Book book);
 	/**
 	 * 
 	* @Title: deleteBook  
@@ -43,7 +43,7 @@ public interface BookService {
 	* @return void    返回类型  
 	* @throws
 	 */
-	void deleteBook(Integer id);
+	int deleteBook(Integer id);
 	/**
 	 * 
 	* @Title: queryAllBooks  

@@ -19,19 +19,19 @@ public class BookServiceImpl implements BookService{
 	private BookMapper bookMapper; // 图书dao
 	
 	@Override
-	public void createBook(Book book) {
-		bookMapper.insert(book);
+	public int createBook(Book book) {
+		return bookMapper.insert(book);
 		
 	}
 
 	@Override
-	public void updateBook(Book book) {
-		bookMapper.updateByPrimaryKeySelective(book);
+	public int updateBook(Book book) {
+		return bookMapper.updateByPrimaryKeySelective(book);
 	}
 
 	@Override
-	public void deleteBook(Integer id) {
-		bookMapper.deleteByPrimaryKey(id);
+	public int deleteBook(Integer id) {
+		return bookMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override

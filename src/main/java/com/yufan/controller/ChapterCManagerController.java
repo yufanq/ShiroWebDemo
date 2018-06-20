@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -39,8 +40,17 @@ public class ChapterCManagerController {
 		
 	}
 	@RequestMapping(method= RequestMethod.POST, value = "/{id}/updateChapter")
-	public void updateChapter(@PathVariable("id")Integer id,String chapterJson,Model model,HttpServletResponse response){
-		Chapter parseObject = JSON.parseObject(chapterJson,Chapter.class);
-		System.out.println(parseObject);
+	public void updateChapter(@PathVariable("id")Integer id,String chapterString,Model model,HttpServletResponse response) throws IOException{
+		// 设置字符集	// 设置 字符集
+		response.setContentType("text/text;charset=UTF-8");
+		// 获取打印流
+		PrintWriter writer = response.getWriter();
+		// 转化接收过来的数据
+		Chapter parseObject = JSON.parseObject(chapterString,Chapter.class);
+		//  修改
+		int updateChapter = chapterService.updateChapter(parseObject);
+		// 打印修改结果
+		writer.print(updateChapter);
+			
 	}
 }

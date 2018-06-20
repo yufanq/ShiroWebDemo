@@ -33,19 +33,19 @@ public class ChapterServiceImpl implements ChapterService{
 	}
 
 	@Override
-	public void updateChapter(Chapter chapter) {
-		chapterMapper.updateByPrimaryKeySelective(chapter);
+	public int updateChapter(Chapter chapter) {
+		return chapterMapper.updateByPrimaryKeySelective(chapter);
 		
 	}
 
 	@Override
-	public void createChapter(Chapter chapter) {
-		chapterMapper.insert(chapter);
+	public int createChapter(Chapter chapter) {
+		return chapterMapper.insert(chapter);
 	}
 
 	@Override
-	public void deleteChapter(Integer id) {
-		chapterMapper.deleteByPrimaryKey(id);
+	public int deleteChapter(Integer id) {
+		return chapterMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override

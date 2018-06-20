@@ -9,6 +9,7 @@
   <sql id="Base_Column_List">
     pt_id, p_id, t_id
   </sql>
+ 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

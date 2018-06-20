@@ -1,5 +1,8 @@
 package com.yufan.dao;
 
+import java.util.List;
+
+import com.yufan.entity.KldpointQuestype;
 import com.yufan.entity.Questype;
 
 public interface QuestypeMapper {
@@ -14,4 +17,6 @@ public interface QuestypeMapper {
     int updateByPrimaryKeySelective(Questype record);
 
     int updateByPrimaryKey(Questype record);
+
+    List<Questype> selectAllQuestionType();
 }

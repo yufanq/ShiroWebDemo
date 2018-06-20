@@ -48,7 +48,6 @@ public class IndexController {
 		
         }
         session.setAttribute("menus", menus);
-        System.out.println(menus);
         return "aindex";
     }
 

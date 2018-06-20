@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -49,5 +50,40 @@ public class BookManagerController {
 		}
 		return "booksmanager";
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/createBook")
+	@RequiresPermissions("index:book:create")
+	public String bookCreate(Book book,Model model){
+		bookService.createBook(book);;
+		return "redirect:/book";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST,value="/{id}/updateBook")
+	@RequiresPermissions("index:book:update")
+	public void bookUpdate(@PathVariable("id") Integer id,String bookJson,Model model, HttpServletResponse response) throws IOException{
+		// 设置 字符集
+		response.setContentType("text/text;charset=UTF-8");
+		// 获取打印流
+		PrintWriter writer = response.getWriter();
 
+		Book parseObject = JSON.parseObject(bookJson, Book.class);
+		
+		int updateBook = bookService.updateBook(parseObject);
+		
+		writer.print(updateBook);
+	}
+	
+	@RequiresPermissions("index:book:delete")
+	@RequestMapping(method = RequestMethod.GET, value="/{id}/deleteBook")
+	public void bookDalete(@PathVariable("id")Integer id,Model model,HttpServletResponse response) throws IOException{
+		// 设置字符集
+		response.setContentType("text/text;charset=UTF-8");
+		// 获取打印流
+		PrintWriter writer = response.getWriter();
+		
+		int deleteBook = bookService.deleteBook(id);
+		
+		writer.print(deleteBook);
+		
+	}
 }

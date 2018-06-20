@@ -94,10 +94,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td>${ bbl.bName }</td>
                                              <td> 
                                             	<shiro:hasPermission name="index:book:update">
-                                            		<a href="">修改</a>
+                                            		<a href="javascript:void(0)" onclick="modBook(this)">修改</a>
                                              	</shiro:hasPermission>
                                             		<shiro:hasPermission name="index:book:delete">
-                                            			<a href="">删除</a>
+                                            			<a href="javascript:void(0)" onclick="deleteBook(this)">删除</a>
                                              		</shiro:hasPermission>
                                              </td>
                                         </tr>
@@ -155,10 +155,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <div class="msg">
                                            		<c:choose>
                                            			<c:when test="${ k.pId != null }">
-                                           			 <a href="">${ k.pName }</a> ${ k.pContent }
+                                           			 <a href="javascript:void(0)">${ k.pName }</a> ${ k.pContent }
                                            			</c:when>
                                            			<c:when test="${ k.pId == null }">
-                                           			 <a href="">无</a> 知识点
+                                           			 <a href="javascript:void(0)">无</a> 知识点
                                            			</c:when>
                                            		</c:choose>
                                      	       </div>
@@ -172,20 +172,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                        
                     </div>
                   </form>
-                   <p>
+                   <p id="knowledge">
                         	<label>知识点</label>
                             <span class="field"><textarea cols="80" rows="5" class="mediuminput"></textarea></span> 
                         </p>
          </div><!--subcontent-->  
          
             <div id="validation" class="subcontent" style="display: none">
-                   <form class="stdform" action="" method="post">
+                   <form class="stdform" action="${pageContext.request.contextPath}/book/createBook" method="post">
                         <p>
                         	<label>书名</label>
-                            <span class="field"><input type="text" name="firstname" id="firstname" class="longinput" /></span>
+                            <span class="field"><input type="text" name="bName" id="firstname" class="longinput" /></span>
                         </p>
-                        <input type="submit" value="修改"/>
-                   
                         <p class="stdformbutton">
                         	<button class="submit radius2">提交</button>
                         </p>

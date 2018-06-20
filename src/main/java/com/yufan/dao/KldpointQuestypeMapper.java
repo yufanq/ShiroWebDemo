@@ -1,5 +1,7 @@
 package com.yufan.dao;
 
+import java.util.List;
+
 import com.yufan.entity.KldpointQuestype;
 
 public interface KldpointQuestypeMapper {

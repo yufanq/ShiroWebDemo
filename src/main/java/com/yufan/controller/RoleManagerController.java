@@ -67,7 +67,6 @@ public class RoleManagerController {
 		ObjectBelongtoBean<Jurisdiction> objectBelongtoBean = 
 				new ObjectBelongtoBean<Jurisdiction>(queryJurisdictionByBolongtoRole, queryJurisdictionNoByBolongtoRole);
 		String jsonString = JSON.toJSONString(objectBelongtoBean);
-		out.print(jsonString);
-		
+		out.print(jsonString);		
 	}
 }

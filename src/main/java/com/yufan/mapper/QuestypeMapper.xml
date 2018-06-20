@@ -9,6 +9,11 @@
   <sql id="Base_Column_List">
     t_id, t_name, t_value
   </sql>
+   <select id="selectAllQuestionType" resultMap=""BaseResultMap"">
+      select 
+    <include refid="Base_Column_List" />
+    from questype
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

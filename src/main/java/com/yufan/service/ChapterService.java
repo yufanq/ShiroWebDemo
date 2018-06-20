@@ -16,11 +16,11 @@ public interface ChapterService {
 
 	List<Chapter> queryChapterByBookId(Integer id);
 	
-	void updateChapter(Chapter chapter);
+	int updateChapter(Chapter chapter);
 	
-	void createChapter(Chapter chapter);
+	int createChapter(Chapter chapter);
 	
-	void deleteChapter(Integer id);
+	int deleteChapter(Integer id);
 	
 	Chapter queryChapterById(Integer id);
 }
