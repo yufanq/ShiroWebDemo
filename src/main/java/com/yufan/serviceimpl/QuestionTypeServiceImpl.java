@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.yufan.bean.Bean;
+import com.yufan.bean.Page;
 import com.yufan.dao.KldpointMapper;
 import com.yufan.dao.KldpointQuestypeMapper;
 import com.yufan.dao.QuestionMapper;
@@ -44,6 +46,15 @@ public class QuestionTypeServiceImpl implements QuestionTypeService{
 	@Override
 	public Questype queryQuestionTypeByid(Integer id) {
 		return questypeMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public Bean<Questype> queryQuestionTypeByPage(Page page) {
+		Bean<Questype> qBean = new Bean<Questype>();
+		qBean.setList(questypeMapper.selectQuestionTypeByPage(page.getStart(), page.getEnd()));
+		qBean.setTotalCount(questypeMapper.selectCountByQuestionType());
+		page.setTotalCount(qBean.getTotalCount());
+		return qBean;
 	}
 
 	

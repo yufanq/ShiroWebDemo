@@ -9,7 +9,18 @@
   <sql id="Base_Column_List">
     t_id, t_name, t_value
   </sql>
-   <select id="selectAllQuestionType" resultMap=""BaseResultMap"">
+  <select id="selectQuestionTypeByPage" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from questype 
+    limit #{start},#{end}
+  </select>
+  
+  <select id="selectCountByQuestionType" resultType="java.lang.Integer">
+  	select count(*) 
+  	from questype
+  </select>
+   <select id="selectAllQuestionType" resultMap="BaseResultMap">
       select 
     <include refid="Base_Column_List" />
     from questype

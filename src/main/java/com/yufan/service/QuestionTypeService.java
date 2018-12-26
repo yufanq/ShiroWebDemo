@@ -2,6 +2,8 @@ package com.yufan.service;
 
 import java.util.List;
 
+import com.yufan.bean.Bean;
+import com.yufan.bean.Page;
 import com.yufan.entity.Questype;
 
 
@@ -17,4 +19,6 @@ public interface QuestionTypeService {
 	List<Questype> queryAllQuestionType();
 	
 	Questype queryQuestionTypeByid(Integer id);
+	
+	Bean<Questype> queryQuestionTypeByPage(Page page);
 }

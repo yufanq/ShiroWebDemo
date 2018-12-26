@@ -94,10 +94,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td>${sbl.pName }</td>
                                             <td> 
                                             	<shiro:hasPermission name="index:major:update">
-                                            		<a href="">修改</a>
+                                            		<a href="javascript:void(0)" onclick="modSpecialty(this)" >修改</a>
                                              	</shiro:hasPermission>
                                             		<shiro:hasPermission name="index:major:delete">
-                                            			<a href="">删除</a>
+                                            			<a href="${pageContext.request.contextPath}/specialty/${sbl.pId}/deleteSpecialty">删除</a>
                                              		</shiro:hasPermission>
                                              </td>
                                         </tr>
@@ -123,15 +123,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <li class="last"><a href="${pageContext.request.contextPath}/specialty?pageIndex=${requestScope.page.pageCount}">&raquo;</a></li>
                     </ul>
                     <br />
+                    <span id="msg"></span>
       </div><!--subcontent-->
          
          
             <div id="validation" class="subcontent" style="display: none">
-                   <form class="stdform" action="" method="post">
                          <p>
                         	<label>专业选择</label>
                         	   <span class="formwrapper">
-                            	<select data-placeholder="选择专业" class="chzn-select" style="width:350px;" tabindex="2">
+                            	<select id="specialySelect" data-placeholder="选择专业" class="chzn-select" style="width:350px;" tabindex="2">
                                 	<c:forEach items="${ specialtyList }" var="sl">
                                 		<option value="${ sl.pId}">${ sl.pName } </option>
                                 	</c:forEach>
@@ -151,24 +151,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 	<span class="arrow ds_prev">&laquo;</span>
                                     <span class="arrow ds_next">&raquo;</span>
                                 </span>
-                                <select name="select4" multiple="multiple" size="10">
+                                <select name="select4" id="	" multiple="multiple" size="10">
                                 	<c:forEach items= "${ bookBelong }" var="nb">
-                                    	<option value="${nb.bId }">${ nb.bName }</option>
+                                    	<option value="${nb.bId }" name="bIds" selected="selected">${ nb.bName }</option>
                                     </c:forEach>
                                 </select>
                             </span>
                         </p>
                           <p class="stdformbutton">
-                        	<button class="submit radius2">提交</button>
+                        	<button class="submit radius2" id="accreditButton" >提交</button>
                         </p>
-                  </form>
          </div><!--subcontent-->
              
             <div id="create" class="subcontent" style="display: none">
-                   <form class="stdform" action="${pageContext.request.contextPath}/static/jurisdiction/addJurisdiction" method="post">
+                   <form class="stdform" action="${pageContext.request.contextPath}/specialty/createSpecialty" method="post">
                         <p>
                         	<label>专业名称</label>
-                            <span class="field"><input type="text" name="jName" id="firstname2" class="longinput" /></span>
+                            <span class="field"><input type="text" name="pName" id="firstname2" class="longinput" /></span>
                         </p>
                           <p class="stdformbutton">
                         	<button class="submit radius2">提交</button>

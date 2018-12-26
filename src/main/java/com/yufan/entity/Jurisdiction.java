@@ -18,7 +18,7 @@ public class Jurisdiction {
     
     
     public static enum ResourceType {
-        menu("菜单"), button("按钮"), list("列表");
+        menu("菜单"), button("按钮"), list("列表"),buttons("按钮们");
 
         private final String info;
         private ResourceType(String info) {

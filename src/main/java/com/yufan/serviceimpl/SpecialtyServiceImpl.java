@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.yufan.bean.Bean;
 import com.yufan.bean.Page;
 import com.yufan.bean.SpecialtyBean;
+import com.yufan.dao.ProfessionBookMapper;
 import com.yufan.dao.ProfessionMapper;
 import com.yufan.entity.Profession;
+import com.yufan.entity.ProfessionBook;
 import com.yufan.service.BookService;
 import com.yufan.service.SpecialtyService;
 /**
@@ -25,11 +27,15 @@ import com.yufan.service.SpecialtyService;
 @Service
 @Transactional
 public class SpecialtyServiceImpl implements SpecialtyService{
+	private static final boolean ProfessionBook = false;
+
 	@Autowired
 	private ProfessionMapper professionMapper; // 专业dao
 	
 	@Autowired
 	private BookService bookService ; // 图书 Service
+	@Autowired
+	private ProfessionBookMapper professionBookMapper;
 	
 	@Override
 	public void createSpecialty(Profession profession) {
@@ -72,6 +78,18 @@ public class SpecialtyServiceImpl implements SpecialtyService{
 	public Profession querySpecialtyById(Integer id) {
 		
 		return professionMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public Integer createSpeacialtyAndBook(Integer sid, int[] bIds) {
+		ProfessionBook professionBook = new ProfessionBook();
+		professionBook.setpId(sid);
+		int insert = 0;
+		for (int i : bIds) {
+			professionBook.setPbId(i);
+		 insert = professionBookMapper.insert(professionBook);
+		}
+		return insert;
 	}
 
 }

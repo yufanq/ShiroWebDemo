@@ -90,10 +90,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <td>${a.aLocked }</td>
                                             <td>
                                             	 <shiro:hasPermission name="jurisdiction:admin:update">
-                                            		<a>修改</a>
+                                            		<a href="javascript:void(0)" onclick="modAdmin(this)">修改</a>
                                              	</shiro:hasPermission>
                                             		<shiro:hasPermission name="jurisdiction:admin:delete">
-                                            			<a>删除</a>
+                                            			<a  href="javascript:void(0)" onclick="deleteAdmin(this)">删除</a>
                                              		</shiro:hasPermission>
                                              </td>
                                         </tr>

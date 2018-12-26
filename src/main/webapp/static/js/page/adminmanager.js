@@ -42,3 +42,26 @@ $(function(){
 	});
 
 })
+/**
+ * 进入 Admin 修改
+ * @param a
+ */
+function modAdmin(a){
+	
+}
+/**
+ *  修改 Admin
+ * @param a
+ */
+function updateAdmin(a){
+	
+}
+
+
+/**
+ *  删除
+ * @param a
+ */
+function deleteAdmin(a){
+	
+}

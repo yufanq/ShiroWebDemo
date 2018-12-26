@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.alibaba.fastjson.JSON;
 import com.yufan.bean.ObjectBelongtoBean;
@@ -73,5 +74,53 @@ public class SpecialtyManagerController {
 		// 打印
 		out.print(jsonString);
 	}
-
+	
+	@RequiresPermissions("index:book:update")
+	@RequestMapping(value="/{id}/updateSpecialty",method=RequestMethod.POST)
+	public void updateSpecialty(@PathVariable("id") Integer id,String name,HttpServletResponse response) {
+		// 设置 字符集
+		response.setContentType("text/text;charset=UTF-8");
+		//  打印出去
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+			// 将接受到的信息封装成对象
+			Profession profession = new Profession();
+			profession.setpId(id);
+			profession.setpName(name);
+			System.out.println("传输" + profession);
+			// 更新
+			specialtyService.updateSpecialty(profession);
+			out.print(1);
+		} catch (IOException e) {
+			out.print(0);
+			e.printStackTrace();
+		}
+	
+	}
+	@RequiresPermissions("index:book:delete")
+	@RequestMapping(value="/{id}/deleteSpecialty",method=RequestMethod.GET)
+	public String  deleteSpecialty(@PathVariable("id") Integer id,HttpServletResponse response) throws IOException{
+		// 设置 字符集
+		response.setContentType("text/text;charset=UTF-8");
+		//  打印出去
+		PrintWriter out = response.getWriter();
+		// 删除
+		specialtyService.deleteSpecialty(id);
+		return "redirect:/specialty";
+	}
+	@RequiresPermissions("index:book:create")
+	@RequestMapping(value="/createSpecialty",method=RequestMethod.POST)
+	public  String createSpecialty(Model model,Profession profession){
+		specialtyService.createSpecialty(profession);
+		return "redirect:/specialty";
+	}
+	
+	@RequiresPermissions("index:major:accredit")
+	@RequestMapping(value="/accreditSpecialtyAndBook",method=RequestMethod.POST)
+	public String accreditSpecialtyAndBook(RedirectAttributes redirectAttributes,Integer sid,int[] bIds){
+		// 插入
+		Integer createSpeacialtyAndBook = specialtyService.createSpeacialtyAndBook(sid, bIds);
+		return "redirect:/specialty";
+	}
 }

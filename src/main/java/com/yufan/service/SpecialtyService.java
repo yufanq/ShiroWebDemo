@@ -75,4 +75,15 @@ public interface SpecialtyService {
 	* @throws
 	 */
 	Profession querySpecialtyById(Integer id);
+	/**
+	 * 
+	* @Title: createSpeacialtyAndBook  
+	* @Description:  插入 专业和图书关系
+	* @param @param sid
+	* @param @param bIds
+	* @param @return    参数  
+	* @return Integer    返回类型  
+	* @throws
+	 */
+	Integer createSpeacialtyAndBook(Integer sid,int[] bIds);
 }
